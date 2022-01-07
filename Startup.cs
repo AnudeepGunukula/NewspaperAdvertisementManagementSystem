@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using NewspaperAdvertisementManagementSystem.Contexts;
 
 namespace NewspaperAdvertisementManagementSystem
 {
@@ -26,6 +29,16 @@ namespace NewspaperAdvertisementManagementSystem
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            // nugets needed "swashbuckle.aspnetcore" and "componentmodel.annontations"
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NewspaperAdvertisementManagementSystem API", Version = "v1" });
+            });
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+          options.UseNpgsql(Configuration.GetConnectionString("Conn")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +50,12 @@ namespace NewspaperAdvertisementManagementSystem
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "NewspaperAdvertisementManagementSystem API V1");
+            });
 
             app.UseRouting();
 
