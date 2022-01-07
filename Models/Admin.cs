@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
+
 namespace NewspaperAdvertisementManagementSystem.Models
 {
     public class Admin
@@ -13,6 +14,7 @@ namespace NewspaperAdvertisementManagementSystem.Models
 
         [NotMapped]
         public IFormFile ProfileImage { get; set; }
+
 
     }
 }

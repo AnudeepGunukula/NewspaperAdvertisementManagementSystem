@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using NewspaperAdvertisementManagementSystem.Contexts;
+using NewspaperAdvertisementManagementSystem.Repositories;
 
 namespace NewspaperAdvertisementManagementSystem
 {
@@ -38,6 +39,10 @@ namespace NewspaperAdvertisementManagementSystem
 
             services.AddDbContext<ApplicationDbContext>(options =>
           options.UseNpgsql(Configuration.GetConnectionString("Conn")));
+
+            services.AddScoped<IAdvertisementRepository, AdvertisementRepository>();
+
+
 
         }
 
