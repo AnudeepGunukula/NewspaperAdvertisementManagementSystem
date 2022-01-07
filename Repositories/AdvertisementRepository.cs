@@ -55,7 +55,7 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
         public async Task<List<Advertisement>> GetExpiredAdvertisements()
         {
-            var result = await _context.Advertisements.Where(x => (DateTime.Now - x.AdvPublishedDate).Days > 5).ToListAsync();
+            var result = await _context.Advertisements.Where(x => x.AdvPublishedDate.AddMonths(3) < DateTime.Today).ToListAsync();
 
             return result;
         }
@@ -68,5 +68,16 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
             return result;
 
         }
+
+        public async Task DeleteAdvertisement(int AdvertisementId)
+        {
+            var result = await _context.Advertisements.FirstOrDefaultAsync(x => x.AdvertisementId == AdvertisementId);
+
+            _context.Advertisements.Remove(result);
+
+            await _context.SaveChangesAsync();
+
+        }
+
     }
 }

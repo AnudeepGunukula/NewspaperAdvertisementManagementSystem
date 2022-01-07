@@ -40,6 +40,13 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
             return NoContent();
         }
 
+        [HttpDelete("DeleteAdvertisement")]
+        public async Task<IActionResult> DeleteAdvertisement(int AdvertisementId)
+        {
+            await repository.DeleteAdvertisement(AdvertisementId);
+            return NoContent();
+        }
+
 
 
 
