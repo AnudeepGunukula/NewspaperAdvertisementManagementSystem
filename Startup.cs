@@ -41,6 +41,8 @@ namespace NewspaperAdvertisementManagementSystem
           options.UseNpgsql(Configuration.GetConnectionString("Conn")));
 
             services.AddScoped<IAdvertisementRepository, AdvertisementRepository>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>();
 
 
 

@@ -12,10 +12,11 @@ namespace NewspaperAdvertisementManagementSystem.Models
         public Boolean PaymentStatus { get; set; }
         public DateTime PaymentTime { get; set; }
 
-        public int AdvertisementId { get; set; }
 
-        [ForeignKey("AdvertisementId")]
-        public Advertisement Advertisement { get; set; }
+        public int AdvertisementId { get; set; }
+        public virtual Advertisement Advertisement { get; set; }
+
+
 
 
     }

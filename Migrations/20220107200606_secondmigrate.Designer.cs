@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NewspaperAdvertisementManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220107062138_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220107200606_secondmigrate")]
+    partial class secondmigrate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,12 +59,19 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("AdvertisementDesc")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("AdvertisementImageName")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("AdvertisementSize")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("AdvertisementTitle")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("AdvertisementType")
@@ -77,9 +84,11 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Subscriber")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("SubscriptionPlan")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("AdvertisementId");

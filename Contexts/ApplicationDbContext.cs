@@ -16,6 +16,12 @@ namespace NewspaperAdvertisementManagementSystem.Contexts
 
         }
 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
         public virtual DbSet<Advertisement> Advertisements { get; set; }
 
         public virtual DbSet<Admin> Admins { get; set; }

@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http;
 namespace NewspaperAdvertisementManagementSystem.Models
 {
@@ -11,19 +12,17 @@ namespace NewspaperAdvertisementManagementSystem.Models
         public int AdvertisementId { get; set; }
 
         public string AdvertisementType { get; set; }
-
         public string AdvertisementTitle { get; set; }
 
         public string AdvertisementDesc { get; set; }
 
+        public string AdvertisementImageName { get; set; }
+
 
         [NotMapped]
-        public IFormFile AdvertisementImage { get; set; }
-
+        public IFormFile AdvertisementImageFile { get; set; }
         public string SubscriptionPlan { get; set; }
-
         public string AdvertisementSize { get; set; }
-
         public string Subscriber { get; set; }
 
         public DateTime AdvRegisteredDate { get; set; }
@@ -36,8 +35,7 @@ namespace NewspaperAdvertisementManagementSystem.Models
 
         public int ClientId { get; set; }
 
-        [ForeignKey("ClientId")]
-        public Client Client { get; set; }
+        public virtual Client Client { get; set; }
 
 
     }

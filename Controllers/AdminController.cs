@@ -10,18 +10,24 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
     [Route("[controller]")]
     public class AdminController : ControllerBase
     {
-        private readonly IAdvertisementRepository repository;
+        private readonly IAdvertisementRepository advertisementRepository;
+        private readonly IPaymentRepository paymentRepository;
 
-        public AdminController(IAdvertisementRepository repository)
+        public AdminController(IAdvertisementRepository advertisementRepository, IPaymentRepository paymentRepository)
         {
-            this.repository = repository;
+            this.advertisementRepository = advertisementRepository;
+            this.paymentRepository = paymentRepository;
         }
 
         [HttpGet("GetAdvertisements")]
         public async Task<IActionResult> GetAdvertisements()
         {
-            List<Advertisement> advertisementList = await repository.GetAdvertisements();
-            return Ok(advertisementList);
+            List<Advertisement> advertisementList = await advertisementRepository.GetAdvertisements();
+            if (advertisementList != null)
+            {
+                return Ok(advertisementList);
+            }
+            return Ok("No Active advertisements");
         }
 
         [HttpGet("GetExpiredAdvertisements")]
@@ -29,23 +35,45 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
         {
             List<Advertisement> expiredAdvertisements;
 
-            expiredAdvertisements = await repository.GetExpiredAdvertisements();
-            return Ok(expiredAdvertisements);
+            expiredAdvertisements = await advertisementRepository.GetExpiredAdvertisements();
+            if (expiredAdvertisements != null)
+            {
+                return Ok(expiredAdvertisements);
+            }
+            return Ok("No Expired Advertisements");
         }
 
         [HttpPut("UpdateAdvertisementStatus")]
         public async Task<IActionResult> UpdateAdvertisementStatus(int AdvertisementId)
         {
-            await repository.UpdateAdvertisementStatus(AdvertisementId);
-            return NoContent();
+            var result = await advertisementRepository.UpdateAdvertisementStatus(AdvertisementId);
+            if (result != null)
+            {
+                return NoContent();
+            }
+            return NotFound();
+
         }
 
         [HttpDelete("DeleteAdvertisement")]
         public async Task<IActionResult> DeleteAdvertisement(int AdvertisementId)
         {
-            await repository.DeleteAdvertisement(AdvertisementId);
-            return NoContent();
+            var result = await advertisementRepository.DeleteAdvertisement(AdvertisementId);
+            if (result == "SuccessfullyDeleted")
+            {
+                return NoContent();
+            }
+            return NotFound();
         }
+
+        [HttpGet("GetPaymentByAdvertisementId")]
+        public async Task<IActionResult> GetPaymentByAdvertisementId(int AdvertisementId)
+        {
+            var result = await paymentRepository.GetPaymentByAdvertisementId(AdvertisementId);
+
+            return Ok(result);
+        }
+
 
 
 
