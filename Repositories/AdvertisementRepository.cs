@@ -119,5 +119,35 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
         }
 
+        public async Task<Advertisement> UpdateAdvertisementByClient(Advertisement advertisement)
+        {
+            var result = await _context.Advertisements.FirstOrDefaultAsync(x => x.AdvertisementId == advertisement.AdvertisementId);
+
+            if (result != null)
+            {
+                result.AdvertisementType = advertisement.AdvertisementType;
+                result.AdvertisementTitle = advertisement.AdvertisementTitle;
+                result.AdvertisementDesc = advertisement.AdvertisementDesc;
+                deleteImage(result.AdvertisementImageName);
+                result.AdvertisementImageName = await SaveImage(advertisement.AdvertisementImageFile);
+                await _context.SaveChangesAsync();
+
+                return result;
+            }
+
+            return null;
+
+        }
+
+        private void deleteImage(string imageName)
+        {
+            var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, "Images//Advertisements", imageName);
+
+            if (File.Exists(imagePath))
+            {
+                File.Delete(imagePath);
+            }
+
+        }
     }
 }

@@ -20,9 +20,10 @@ namespace NewspaperAdvertisementManagementSystem.Models
         public string Address { get; set; }
 
         public string MobileNumber { get; set; }
+        public string ProfileImageName { get; set; }
 
         [NotMapped]
-        public IFormFile ProfileImage { get; set; }
+        public IFormFile ProfileImageFile { get; set; }
 
 
 

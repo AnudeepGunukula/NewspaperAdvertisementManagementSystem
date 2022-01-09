@@ -12,11 +12,13 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
     {
         private readonly IAdvertisementRepository advertisementRepository;
         private readonly IPaymentRepository paymentRepository;
+        private readonly IClientRepository clientRepository;
 
-        public ClientController(IAdvertisementRepository advertisementRepository, IPaymentRepository paymentRepository)
+        public ClientController(IAdvertisementRepository advertisementRepository, IPaymentRepository paymentRepository, IClientRepository clientRepository)
         {
             this.advertisementRepository = advertisementRepository;
             this.paymentRepository = paymentRepository;
+            this.clientRepository = clientRepository;
         }
 
         [HttpPost("AddAdvertisement")]
@@ -43,6 +45,28 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
             return Ok(result);
         }
 
+        [HttpPut("UpdateAdvertisement")]
+        public async Task<IActionResult> UpdateAdvertisement([FromForm] Advertisement advertisement)
+        {
+            var result = await advertisementRepository.UpdateAdvertisementByClient(advertisement);
+            return Ok(result);
+        }
 
+        [HttpPost("CreateProfile")]
+        public async Task<IActionResult> CreateProfile([FromForm] Client client)
+        {
+            var result = await clientRepository.AddClient(client);
+
+            return Ok(result);
+
+        }
+
+        [HttpPut("UpdateProfile")]
+
+        public async Task<IActionResult> UpdateProfile([FromForm] Client client)
+        {
+            var result = await clientRepository.UpdateClient(client);
+            return Ok(result);
+        }
     }
 }
