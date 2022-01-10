@@ -3,11 +3,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NewspaperAdvertisementManagementSystem.Repositories;
 using NewspaperAdvertisementManagementSystem.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 namespace NewspaperAdvertisementManagementSystem.Controllers
-
 {
+    [Authorize(Roles = UserRoles.User)]
     [ApiController]
     [Route("[controller]")]
+
     public class ClientController : ControllerBase
     {
         private readonly IAdvertisementRepository advertisementRepository;
@@ -30,9 +34,15 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
         }
 
         [HttpGet("GetAdvertisementsByClientId")]
-        public async Task<IActionResult> GetAdvertisementsByClientId(int ClientId)
+        public async Task<IActionResult> GetAdvertisementsByClientId()
         {
-            var advertisementsList = await advertisementRepository.GetAdvertisementsByClientId(ClientId);
+            // var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            // Getting the ID value
+            // var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
+            // System.IO.File.WriteAllText("output.txt", claim.Value);
+
+            var advertisementsList = await advertisementRepository.GetAdvertisementsByClientId();
+
             return Ok(advertisementsList);
 
         }
@@ -52,14 +62,14 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
             return Ok(result);
         }
 
-        [HttpPost("CreateProfile")]
-        public async Task<IActionResult> CreateProfile([FromForm] Client client)
-        {
-            var result = await clientRepository.AddClient(client);
+        // [HttpPost("CreateProfile")]
+        // public async Task<IActionResult> CreateProfile([FromForm] Client client)
+        // {
+        //     var result = await clientRepository.AddClient(client);
 
-            return Ok(result);
+        //     return Ok(result);
 
-        }
+        // }
 
         [HttpPut("UpdateProfile")]
 

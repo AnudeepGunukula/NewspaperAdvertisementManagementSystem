@@ -9,6 +9,8 @@ using System;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace NewspaperAdvertisementManagementSystem.Repositories
 {
@@ -16,9 +18,13 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly UserManager<Client> _userManager;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public AdvertisementRepository(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
+        public AdvertisementRepository(ApplicationDbContext context, UserManager<Client> userManager, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment hostEnvironment)
         {
+            this._userManager = userManager;
+            this.httpContextAccessor = httpContextAccessor;
             this._context = context;
             this._hostEnvironment = hostEnvironment;
         }
@@ -60,16 +66,6 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
 
         }
-
-
-
-
-
-
-
-
-
-
         public async Task<Advertisement> UpdateAdvertisementStatus(int AdvertisementId)
         {
             var result = await _context.Advertisements.FirstOrDefaultAsync(adv => adv.AdvertisementId == AdvertisementId);
@@ -93,10 +89,13 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
             return result;
         }
 
-        public async Task<List<Advertisement>> GetAdvertisementsByClientId(int ClientId)
+        public async Task<List<Advertisement>> GetAdvertisementsByClientId()
         {
 
-            var result = await _context.Advertisements.Where(x => x.ClientId == ClientId).ToListAsync();
+            string userName = httpContextAccessor.HttpContext.User.Claims.First(i => i.Type == ClaimTypes.Name).Value;
+
+            var client = await _userManager.Users.FirstOrDefaultAsync(user => user.UserName == userName);
+            var result = await _context.Advertisements.Where(x => x.ClientId == client.Id).ToListAsync();
 
             return result;
 

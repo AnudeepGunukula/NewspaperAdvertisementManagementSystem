@@ -14,6 +14,11 @@ using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using NewspaperAdvertisementManagementSystem.Contexts;
 using NewspaperAdvertisementManagementSystem.Repositories;
+using NewspaperAdvertisementManagementSystem.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace NewspaperAdvertisementManagementSystem
 {
@@ -40,9 +45,35 @@ namespace NewspaperAdvertisementManagementSystem
             services.AddDbContext<ApplicationDbContext>(options =>
           options.UseNpgsql(Configuration.GetConnectionString("Conn")));
 
+            services.AddIdentity<Client, IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(option =>
+            {
+                option.SaveToken = true;
+                option.RequireHttpsMetadata = false;
+                option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["JWT:ValidAudience"],
+                    ValidIssuer = Configuration["JWT:ValidIssuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
+                };
+            });
+
             services.AddScoped<IAdvertisementRepository, AdvertisementRepository>();
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddTransient<IAccountRepository, AccountRepository>();
+
 
 
 
@@ -65,6 +96,8 @@ namespace NewspaperAdvertisementManagementSystem
             });
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

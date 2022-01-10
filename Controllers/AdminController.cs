@@ -3,9 +3,12 @@ using System.Threading.Tasks;
 using NewspaperAdvertisementManagementSystem.Models;
 using System.Collections.Generic;
 using NewspaperAdvertisementManagementSystem.Repositories;
+using Microsoft.AspNetCore.Authorization;
+
 namespace NewspaperAdvertisementManagementSystem.Controllers
 {
 
+    [Authorize(Roles = UserRoles.Admin)]
     [ApiController]
     [Route("[controller]")]
     public class AdminController : ControllerBase

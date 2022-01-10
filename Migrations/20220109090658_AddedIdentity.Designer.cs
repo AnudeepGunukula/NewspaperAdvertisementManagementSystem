@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewspaperAdvertisementManagementSystem.Contexts;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NewspaperAdvertisementManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220109090658_AddedIdentity")]
+    partial class AddedIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -204,7 +206,11 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
                     b.Property<bool>("Agree")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("ClientId")
+                    b.Property<int>("ClientId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ClientId1")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Subscriber")
@@ -215,7 +221,7 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
 
                     b.HasKey("AdvertisementId");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("ClientId1");
 
                     b.ToTable("Advertisements");
                 });
@@ -230,6 +236,9 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
 
                     b.Property<string>("Address")
                         .HasColumnType("text");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -413,7 +422,9 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
                 {
                     b.HasOne("NewspaperAdvertisementManagementSystem.Models.Client", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientId");
+                        .HasForeignKey("ClientId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("NewspaperAdvertisementManagementSystem.Models.Payment", b =>

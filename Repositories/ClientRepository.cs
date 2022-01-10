@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 
 namespace NewspaperAdvertisementManagementSystem.Repositories
 {
@@ -14,21 +15,23 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly UserManager<Client> _userManager;
 
-        public ClientRepository(ApplicationDbContext context, IWebHostEnvironment _hostEnvironment)
+        public ClientRepository(ApplicationDbContext context, UserManager<Client> userManager, IWebHostEnvironment _hostEnvironment)
         {
+            this._userManager = userManager;
             this._hostEnvironment = _hostEnvironment;
             this._context = context;
         }
 
-        public async Task<int> AddClient(Client client)
-        {
-            client.ProfileImageName = await SaveImage(client.ProfileImageFile);
-            var result = await _context.Clients.AddAsync(client);
+        // public async Task<int> AddClient(Client client)
+        // {
+        //     client.ProfileImageName = await SaveImage(client.ProfileImageFile);
+        //     var result = await _context.Clients.AddAsync(client);
 
-            await _context.SaveChangesAsync();
-            return result.Entity.ClientId;
-        }
+        //     await _context.SaveChangesAsync();
+        //     return result.Entity.ClientId;
+        // }
 
         private async Task<string> SaveImage(IFormFile imageFile)
         {
@@ -46,10 +49,10 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
         }
 
-        public async Task<Client> GetClientById(int ClientId)
+        public async Task<Client> GetClientById(string ClientId)
         {
 
-            Client client = await _context.Clients.FirstOrDefaultAsync(client => client.ClientId == ClientId);
+            Client client = await _context.Clients.FirstOrDefaultAsync(client => client.Id == ClientId);
 
             return client;
 
@@ -57,14 +60,17 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
         public async Task<Client> UpdateClient(Client client)
         {
-            var result = await _context.Clients.FirstOrDefaultAsync(x => x.ClientId == client.ClientId);
+            var result = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == client.Id);
             if (result != null)
             {
                 result.FirstName = client.FirstName;
                 result.LastName = client.LastName;
                 result.Email = client.Email;
                 result.Address = client.Address;
-                deleteImage(result.ProfileImageName);
+                if (result.ProfileImageName != null)
+                {
+                    deleteImage(result.ProfileImageName);
+                }
                 result.ProfileImageName = await SaveImage(client.ProfileImageFile);
 
                 await _context.SaveChangesAsync();

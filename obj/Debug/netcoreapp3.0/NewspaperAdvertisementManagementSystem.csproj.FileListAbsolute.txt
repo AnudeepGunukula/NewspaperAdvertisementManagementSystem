@@ -48,3 +48,15 @@ C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\obj
 C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\obj\Debug\netcoreapp3.0\NewspaperAdvertisementManagementSystem.csproj.CopyComplete
 C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\obj\Debug\netcoreapp3.0\NewspaperAdvertisementManagementSystem.dll
 C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\obj\Debug\netcoreapp3.0\NewspaperAdvertisementManagementSystem.pdb
+C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\AGUNUKUL\Desktop\Algo\Github\NewspaperAdvertisementManagementSystem\bin\Debug\netcoreapp3.0\System.IdentityModel.Tokens.Jwt.dll

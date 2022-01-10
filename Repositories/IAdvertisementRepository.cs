@@ -15,7 +15,7 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
         Task<Advertisement> UpdateAdvertisementStatus(int AdvertisementId);
 
-        Task<List<Advertisement>> GetAdvertisementsByClientId(int ClientId);
+        Task<List<Advertisement>> GetAdvertisementsByClientId();
 
         Task<Advertisement> UpdateAdvertisementByClient(Advertisement advertisement);
 
