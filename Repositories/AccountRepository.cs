@@ -8,6 +8,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
+
+
 namespace NewspaperAdvertisementManagementSystem.Repositories
 {
     public class AccountRepository : IAccountRepository
@@ -92,12 +96,18 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
                 return null;
             }
 
+            var users = await _userManager.FindByNameAsync(signInModel.Email);
+            var roles = await _userManager.GetRolesAsync(users);
+
+            var role = roles[0];
+
             var authClaims = new List<Claim>
             {
                new Claim(ClaimTypes.Name,signInModel.Email),
                new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
+               new Claim("role",role)
 
-            };
+        };
 
             var authSigninKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]));
 
