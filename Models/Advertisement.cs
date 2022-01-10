@@ -9,7 +9,8 @@ namespace NewspaperAdvertisementManagementSystem.Models
     {
 
         [Key]
-        public int AdvertisementId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long AdvertisementId { get; set; }
 
         public string AdvertisementType { get; set; }
         public string AdvertisementTitle { get; set; }

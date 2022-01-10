@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NewspaperAdvertisementManagementSystem.Models
 {
@@ -6,7 +7,8 @@ namespace NewspaperAdvertisementManagementSystem.Models
     {
 
         [Key]
-        public int SubscriberId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long SubscriberId { get; set; }
 
         public string SubscriberDesc { get; set; }
 

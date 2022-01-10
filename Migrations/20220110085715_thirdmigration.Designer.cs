@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewspaperAdvertisementManagementSystem.Contexts;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NewspaperAdvertisementManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220110085715_thirdmigration")]
+    partial class thirdmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -301,9 +303,9 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
 
             modelBuilder.Entity("NewspaperAdvertisementManagementSystem.Models.Payment", b =>
                 {
-                    b.Property<long>("PaymentId")
+                    b.Property<int>("PaymentId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("AdvertisementId")
@@ -336,9 +338,9 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
 
             modelBuilder.Entity("NewspaperAdvertisementManagementSystem.Models.Subscriber", b =>
                 {
-                    b.Property<long>("SubscriberId")
+                    b.Property<int>("SubscriberId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("CompanyEmail")

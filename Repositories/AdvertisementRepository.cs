@@ -40,12 +40,20 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
         public async Task<int> AddAdvertisement(Advertisement advertisement)
         {
+            string userName = httpContextAccessor.HttpContext.User.Claims.First(i => i.Type == ClaimTypes.Name).Value;
+
+            var client = await _userManager.Users.FirstOrDefaultAsync(user => user.UserName == userName);
+
+            advertisement.ClientId = client.Id;
+
             advertisement.AdvertisementImageName = await SaveImage(advertisement.AdvertisementImageFile);
+
+
             var result = await _context.Advertisements.AddAsync(advertisement);
 
             await _context.SaveChangesAsync();
 
-            return result.Entity.AdvertisementId;
+            return Convert.ToInt32(result.Entity.AdvertisementId);
         }
 
 

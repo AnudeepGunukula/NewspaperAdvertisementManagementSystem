@@ -1,11 +1,14 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NewspaperAdvertisementManagementSystem.Models
 {
     public class Payment
     {
-        public int PaymentId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long PaymentId { get; set; }
         public int PaymentAmount { get; set; }
         public string PaymentType { get; set; }
         public string UpiId { get; set; }
