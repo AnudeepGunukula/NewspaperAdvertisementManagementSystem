@@ -51,7 +51,7 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
         public async Task<IActionResult> Login([FromBody] SignIn signInModel)
         {
             var result = await _accountRepository.Login(signInModel);
-            if (string.IsNullOrEmpty(result))
+            if (result == null)
             {
                 return Unauthorized();
 

@@ -87,9 +87,10 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
         }
 
-        public async Task<string> Login(SignIn signInModel)
+        public async Task<Response> Login(SignIn signInModel)
         {
             var result = await _signInManager.PasswordSignInAsync(signInModel.Email, signInModel.Password, false, false);
+            // 
 
             if (!result.Succeeded)
             {
@@ -100,6 +101,7 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
             var roles = await _userManager.GetRolesAsync(users);
 
             var role = roles[0];
+
 
             var authClaims = new List<Claim>
             {
@@ -118,8 +120,13 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigninKey, SecurityAlgorithms.HmacSha256Signature)
             );
+            var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            Response response = new Response();
+
+            response.Token = jwtToken;
+
+            return response;
 
         }
     }

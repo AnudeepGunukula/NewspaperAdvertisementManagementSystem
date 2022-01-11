@@ -10,6 +10,6 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
         Task<IdentityResult> AdminSignUp(SignUp signUpModel);
 
-        Task<string> Login(SignIn signInModel);
+        Task<Response> Login(SignIn signInModel);
     }
 }
