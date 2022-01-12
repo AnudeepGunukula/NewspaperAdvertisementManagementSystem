@@ -125,6 +125,7 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
             Response response = new Response();
 
             response.Token = jwtToken;
+            response.role = role;
 
             return response;
 
