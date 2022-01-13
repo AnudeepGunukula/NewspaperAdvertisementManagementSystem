@@ -20,6 +20,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
 
 namespace NewspaperAdvertisementManagementSystem
 {
@@ -112,6 +114,15 @@ namespace NewspaperAdvertisementManagementSystem
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "NewspaperAdvertisementManagementSystem API V1");
+            });
+
+
+            app.UseFileServer(new FileServerOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                   Path.Combine(Directory.GetCurrentDirectory(), "Images")),
+                RequestPath = "/Images",
+                EnableDefaultFiles = true
             });
 
             app.UseRouting();
