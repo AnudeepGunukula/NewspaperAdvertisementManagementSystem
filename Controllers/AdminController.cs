@@ -46,9 +46,10 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
             return Ok("No Expired Advertisements");
         }
 
-        [HttpPut("UpdateAdvertisementStatus")]
+        [HttpPut("UpdateAdvertisementStatus/{AdvertisementId}")]
         public async Task<IActionResult> UpdateAdvertisementStatus(int AdvertisementId)
         {
+            System.IO.File.WriteAllText("output.txt", AdvertisementId.ToString());
             var result = await advertisementRepository.UpdateAdvertisementStatus(AdvertisementId);
             if (result != null)
             {
@@ -58,7 +59,7 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
 
         }
 
-        [HttpDelete("DeleteAdvertisement")]
+        [HttpDelete("DeleteAdvertisement/{AdvertisementId}")]
         public async Task<IActionResult> DeleteAdvertisement(int AdvertisementId)
         {
             var result = await advertisementRepository.DeleteAdvertisement(AdvertisementId);
@@ -69,7 +70,7 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
             return NotFound();
         }
 
-        [HttpGet("GetPaymentByAdvertisementId")]
+        [HttpGet("GetPaymentByAdvertisementId/{AdvertisementId}")]
         public async Task<IActionResult> GetPaymentByAdvertisementId(int AdvertisementId)
         {
             var result = await paymentRepository.GetPaymentByAdvertisementId(AdvertisementId);
