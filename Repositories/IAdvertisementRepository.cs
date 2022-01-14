@@ -21,6 +21,8 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
         Task<string> DeleteAdvertisement(int AdvertisementId);
 
+        Task<string> DeleteAdvertisementByClient(int AdvertisementId);
+
 
 
     }

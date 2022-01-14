@@ -59,6 +59,7 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
         public async Task<string> SaveImage(IFormFile imageFile)
         {
+            // System.IO.File.WriteAllText("output.txt", imageFile.ToString());
             string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
             imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(imageFile.FileName);
 
@@ -126,6 +127,8 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
         }
 
+
+
         public async Task<Advertisement> UpdateAdvertisementByClient(Advertisement advertisement)
         {
             var result = await _context.Advertisements.FirstOrDefaultAsync(x => x.AdvertisementId == advertisement.AdvertisementId);
@@ -155,6 +158,26 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
                 File.Delete(imagePath);
             }
 
+        }
+
+        public async Task<string> DeleteAdvertisementByClient(int AdvertisementId)
+        {
+            string userName = httpContextAccessor.HttpContext.User.Claims.First(i => i.Type == ClaimTypes.Name).Value;
+
+            var client = await _userManager.Users.FirstOrDefaultAsync(user => user.UserName == userName);
+            var result = await _context.Advertisements.FirstOrDefaultAsync(x => (x.ClientId == client.Id) && (x.AdvertisementId == AdvertisementId));
+
+            System.IO.File.WriteAllText("output.txt", result.ClientId + " " + result.AdvertisementId);
+            if (result != null)
+            {
+                _context.Advertisements.Remove(result);
+
+                await _context.SaveChangesAsync();
+
+                return "SuccessfullyDeleted";
+
+            }
+            return null;
         }
     }
 }

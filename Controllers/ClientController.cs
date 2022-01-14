@@ -33,6 +33,13 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
             // return CreatedAtAction(nameof(GetEmployeeById), new { id = id, controller = "Employee" }, employee);
         }
 
+        [HttpDelete("DeleteAdvertisementByClient/{AdvertisementId}")]
+        public async Task<IActionResult> DeleteAdvertisementByClient(int AdvertisementId)
+        {
+            var result = await advertisementRepository.DeleteAdvertisementByClient(AdvertisementId);
+            return Ok(result);
+        }
+
         [HttpGet("GetAdvertisementsByClientId")]
         public async Task<IActionResult> GetAdvertisementsByClientId()
         {
