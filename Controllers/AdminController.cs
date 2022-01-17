@@ -70,11 +70,19 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
             return NotFound();
         }
 
-        [HttpGet("GetPaymentByAdvertisementId/{AdvertisementId}")]
-        public async Task<IActionResult> GetPaymentByAdvertisementId(int AdvertisementId)
-        {
-            var result = await paymentRepository.GetPaymentByAdvertisementId(AdvertisementId);
+        // [HttpGet("GetPaymentByAdvertisementId/{AdvertisementId}")]
+        // public async Task<IActionResult> GetPaymentByAdvertisementId(int AdvertisementId)
+        // {
+        //     var result = await paymentRepository.GetPaymentByAdvertisementId(AdvertisementId);
 
+        //     return Ok(result);
+        // }
+
+        [HttpGet("GetUnApprovedAds")]
+
+        public async Task<IActionResult> GetUnApprovedAds()
+        {
+            var result = await advertisementRepository.GetUnApprovedAds();
             return Ok(result);
         }
 

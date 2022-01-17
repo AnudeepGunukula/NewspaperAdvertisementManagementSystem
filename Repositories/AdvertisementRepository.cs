@@ -83,6 +83,8 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
             {
                 result.AdminApproved = true;
 
+                result.AdvPublishedDate = Convert.ToDateTime(DateTime.Now);
+
                 await _context.SaveChangesAsync();
 
                 return result;
@@ -93,7 +95,8 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
         public async Task<List<Advertisement>> GetExpiredAdvertisements()
         {
-            var result = await _context.Advertisements.Where(x => x.AdvPublishedDate.AddMonths(3) < DateTime.Today).ToListAsync();
+
+            var result = await _context.Advertisements.Where(x => x.AdvPublishedDate.AddDays(x.SubscriptionDays) < DateTime.Today && x.AdminApproved == true).ToListAsync();
 
             return result;
         }
@@ -180,6 +183,12 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
             }
             return null;
+        }
+
+        public async Task<List<Advertisement>> GetUnApprovedAds()
+        {
+            var result = await _context.Advertisements.Where(x => x.AdminApproved == false).ToListAsync();
+            return result;
         }
     }
 }

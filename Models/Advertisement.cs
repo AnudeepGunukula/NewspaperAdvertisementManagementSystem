@@ -26,6 +26,8 @@ namespace NewspaperAdvertisementManagementSystem.Models
         public string AdvertisementSize { get; set; }
         public string Subscriber { get; set; }
 
+        public int SubscriptionDays { get; set; }
+
         public DateTime AdvRegisteredDate { get; set; }
 
         public DateTime AdvPublishedDate { get; set; }
