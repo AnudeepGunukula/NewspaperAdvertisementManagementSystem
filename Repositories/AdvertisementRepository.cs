@@ -167,9 +167,11 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
             var client = await _userManager.Users.FirstOrDefaultAsync(user => user.UserName == userName);
             var result = await _context.Advertisements.FirstOrDefaultAsync(x => (x.ClientId == client.Id) && (x.AdvertisementId == AdvertisementId));
 
-            System.IO.File.WriteAllText("output.txt", result.ClientId + " " + result.AdvertisementId);
+
             if (result != null)
             {
+
+                deleteImage(result.AdvertisementImageName);
                 _context.Advertisements.Remove(result);
 
                 await _context.SaveChangesAsync();

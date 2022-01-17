@@ -83,6 +83,13 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
         public async Task<IActionResult> UpdateProfile([FromForm] Client client)
         {
             var result = await clientRepository.UpdateClient(client);
+            return NoContent();
+        }
+
+        [HttpGet("GetClientInfo")]
+        public async Task<IActionResult> GetClientInfo()
+        {
+            var result = await clientRepository.GetClientInfo();
             return Ok(result);
         }
     }

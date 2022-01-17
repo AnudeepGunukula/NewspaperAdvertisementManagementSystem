@@ -8,6 +8,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace NewspaperAdvertisementManagementSystem.Repositories
 {
@@ -16,9 +17,11 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostEnvironment;
         private readonly UserManager<Client> _userManager;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public ClientRepository(ApplicationDbContext context, UserManager<Client> userManager, IWebHostEnvironment _hostEnvironment)
+        public ClientRepository(ApplicationDbContext context, UserManager<Client> userManager, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment _hostEnvironment)
         {
+            this.httpContextAccessor = httpContextAccessor;
             this._userManager = userManager;
             this._hostEnvironment = _hostEnvironment;
             this._context = context;
@@ -58,15 +61,36 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
         }
 
+
+        public async Task<ClientInfo> GetClientInfo()
+        {
+            string userName = httpContextAccessor.HttpContext.User.Claims.First(i => i.Type == ClaimTypes.Name).Value;
+
+            var client = await _userManager.Users.FirstOrDefaultAsync(user => user.UserName == userName);
+
+            ClientInfo cinfo = new ClientInfo();
+            cinfo.FirstName = client.FirstName;
+            cinfo.LastName = client.LastName;
+            cinfo.Address = client.Address;
+            cinfo.MobileNumber = client.MobileNumber;
+            cinfo.ProfileImageName = client.ProfileImageName;
+            return (cinfo);
+        }
+
         public async Task<Client> UpdateClient(Client client)
         {
-            var result = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == client.Id);
+            string userName = httpContextAccessor.HttpContext.User.Claims.First(i => i.Type == ClaimTypes.Name).Value;
+
+            var clientObj = await _userManager.Users.FirstOrDefaultAsync(user => user.UserName == userName);
+            var Id = clientObj.Id;
+
+            var result = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == Id);
             if (result != null)
             {
                 result.FirstName = client.FirstName;
                 result.LastName = client.LastName;
-                result.Email = client.Email;
                 result.Address = client.Address;
+                result.MobileNumber = client.MobileNumber;
                 if (result.ProfileImageName != null)
                 {
                     deleteImage(result.ProfileImageName);

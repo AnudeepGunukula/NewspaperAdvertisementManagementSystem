@@ -10,5 +10,7 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
         // Task<int> AddClient(Client client);
 
         Task<Client> UpdateClient(Client client);
+
+        Task<ClientInfo> GetClientInfo();
     }
 }
