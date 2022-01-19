@@ -54,18 +54,25 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
 
         }
 
-        [HttpPost("AddPayment")]
-        public async Task<IActionResult> AddPayment([FromBody] Payment payment)
-        {
-            var result = await paymentRepository.AddPayment(payment);
+        // [HttpPost("AddPayment")]
+        // public async Task<IActionResult> AddPayment([FromBody] Payment payment)
+        // {
+        //     var result = await paymentRepository.AddPayment(payment);
 
-            return Ok(result);
-        }
+        //     return Ok(result);
+        // }
 
         [HttpPut("UpdateAdvertisement")]
         public async Task<IActionResult> UpdateAdvertisement([FromForm] Advertisement advertisement)
         {
             var result = await advertisementRepository.UpdateAdvertisementByClient(advertisement);
+            return Ok(result);
+        }
+
+        [HttpPut("DeleteNotification/{AdvertisementId}")]
+        public async Task<IActionResult> DeleteNotification(int AdvertisementId)
+        {
+            var result = await advertisementRepository.DeleteNotification(AdvertisementId);
             return Ok(result);
         }
 

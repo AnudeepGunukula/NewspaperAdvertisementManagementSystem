@@ -36,6 +36,8 @@ namespace NewspaperAdvertisementManagementSystem.Models
 
         public Boolean AdminApproved { get; set; }
 
+        public Boolean Notifications { get; set; }
+
         public string ClientId { get; set; }
 
         public virtual Client Client { get; set; }

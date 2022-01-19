@@ -84,6 +84,7 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
                 result.AdminApproved = true;
 
                 result.AdvPublishedDate = Convert.ToDateTime(DateTime.Now);
+                result.Notifications = true;
 
                 await _context.SaveChangesAsync();
 
@@ -189,6 +190,19 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
         {
             var result = await _context.Advertisements.Where(x => x.AdminApproved == false).ToListAsync();
             return result;
+        }
+
+        public async Task<string> DeleteNotification(int AdvertisementId)
+        {
+            var result = await _context.Advertisements.FirstOrDefaultAsync(x => x.AdvertisementId == AdvertisementId && x.Notifications == true);
+            if (result != null)
+            {
+                result.Notifications = false;
+                await _context.SaveChangesAsync();
+
+                return "success";
+            }
+            return null;
         }
     }
 }
