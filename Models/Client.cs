@@ -22,6 +22,8 @@ namespace NewspaperAdvertisementManagementSystem.Models
         [NotMapped]
         public IFormFile ProfileImageFile { get; set; }
 
+        public string SecurityQuestion { get; set; }
+
 
 
 

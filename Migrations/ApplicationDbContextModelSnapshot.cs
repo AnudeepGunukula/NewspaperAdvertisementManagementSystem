@@ -283,6 +283,9 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
                     b.Property<string>("ProfileImageName")
                         .HasColumnType("text");
 
+                    b.Property<string>("SecurityQuestion")
+                        .HasColumnType("text");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 

@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace NewspaperAdvertisementManagementSystem.Migrations
 {
-    public partial class AddedIdentity : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -56,12 +56,12 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    ClientId = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
                     MobileNumber = table.Column<string>(nullable: true),
-                    ProfileImageName = table.Column<string>(nullable: true)
+                    ProfileImageName = table.Column<string>(nullable: true),
+                    SecurityQuestion = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,7 +72,7 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
                 name: "Subscribers",
                 columns: table => new
                 {
-                    SubscriberId = table.Column<int>(nullable: false)
+                    SubscriberId = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     SubscriberDesc = table.Column<string>(nullable: true),
                     CompanyEmail = table.Column<string>(nullable: true),
@@ -110,7 +110,7 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
                 name: "Advertisements",
                 columns: table => new
                 {
-                    AdvertisementId = table.Column<int>(nullable: false)
+                    AdvertisementId = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     AdvertisementType = table.Column<string>(nullable: true),
                     AdvertisementTitle = table.Column<string>(nullable: true),
@@ -119,22 +119,23 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
                     SubscriptionPlan = table.Column<string>(nullable: true),
                     AdvertisementSize = table.Column<string>(nullable: true),
                     Subscriber = table.Column<string>(nullable: true),
+                    SubscriptionDays = table.Column<int>(nullable: false),
                     AdvRegisteredDate = table.Column<DateTime>(nullable: false),
                     AdvPublishedDate = table.Column<DateTime>(nullable: false),
                     Agree = table.Column<bool>(nullable: false),
                     AdminApproved = table.Column<bool>(nullable: false),
-                    ClientId = table.Column<int>(nullable: false),
-                    ClientId1 = table.Column<string>(nullable: false)
+                    Notifications = table.Column<bool>(nullable: false),
+                    ClientId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Advertisements", x => x.AdvertisementId);
                     table.ForeignKey(
-                        name: "FK_Advertisements_AspNetUsers_ClientId1",
-                        column: x => x.ClientId1,
+                        name: "FK_Advertisements_AspNetUsers_ClientId",
+                        column: x => x.ClientId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -226,30 +227,31 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
                 name: "Payments",
                 columns: table => new
                 {
-                    PaymentId = table.Column<int>(nullable: false)
+                    PaymentId = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PaymentAmount = table.Column<int>(nullable: false),
                     PaymentType = table.Column<string>(nullable: true),
                     UpiId = table.Column<string>(nullable: true),
                     PaymentStatus = table.Column<bool>(nullable: false),
                     PaymentTime = table.Column<DateTime>(nullable: false),
-                    AdvertisementId = table.Column<int>(nullable: false)
+                    AdvertisementId = table.Column<int>(nullable: false),
+                    AdvertisementId1 = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Payments", x => x.PaymentId);
                     table.ForeignKey(
-                        name: "FK_Payments_Advertisements_AdvertisementId",
-                        column: x => x.AdvertisementId,
+                        name: "FK_Payments_Advertisements_AdvertisementId1",
+                        column: x => x.AdvertisementId1,
                         principalTable: "Advertisements",
                         principalColumn: "AdvertisementId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Advertisements_ClientId1",
+                name: "IX_Advertisements_ClientId",
                 table: "Advertisements",
-                column: "ClientId1");
+                column: "ClientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -289,9 +291,9 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payments_AdvertisementId",
+                name: "IX_Payments_AdvertisementId1",
                 table: "Payments",
-                column: "AdvertisementId");
+                column: "AdvertisementId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

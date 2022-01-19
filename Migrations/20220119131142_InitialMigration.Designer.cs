@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NewspaperAdvertisementManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220117133247_lastmigration")]
-    partial class lastmigration
+    [Migration("20220119131142_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -209,6 +209,9 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
                     b.Property<string>("ClientId")
                         .HasColumnType("text");
 
+                    b.Property<bool>("Notifications")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Subscriber")
                         .HasColumnType("text");
 
@@ -280,6 +283,9 @@ namespace NewspaperAdvertisementManagementSystem.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("ProfileImageName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SecurityQuestion")
                         .HasColumnType("text");
 
                     b.Property<string>("SecurityStamp")

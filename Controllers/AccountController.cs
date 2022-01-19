@@ -60,6 +60,28 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
 
         }
 
+        [AllowAnonymous]
+        [HttpPost("ForgotPassword")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPassword model)
+        {
+            var result = await _accountRepository.ForgotPassword(model);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("ResetPassword")]
+
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordModel resetmodel)
+        {
+            var result = await _accountRepository.ResetPassword(resetmodel);
+            return Ok(result);
+        }
+
+
 
     }
 }

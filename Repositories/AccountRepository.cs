@@ -37,7 +37,8 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
                 FirstName = signUpModel.FirstName,
                 LastName = signUpModel.LastName,
                 Email = signUpModel.LastName,
-                UserName = signUpModel.Email
+                UserName = signUpModel.Email,
+                SecurityQuestion = signUpModel.SecurityQuestion
             };
 
             var result = await _userManager.CreateAsync(user, signUpModel.Password);
@@ -129,6 +130,47 @@ namespace NewspaperAdvertisementManagementSystem.Repositories
 
             return response;
 
+        }
+
+
+
+
+        public async Task<ForgotPasswordToken> ForgotPassword(ForgotPassword model)
+        {
+            var user = await _userManager.FindByNameAsync(model.Email);
+
+            if (user != null && user.SecurityQuestion == model.SecurityQuestion)
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+                ForgotPasswordToken forgotPasswordObj = new ForgotPasswordToken();
+
+                forgotPasswordObj.Email = model.Email;
+                forgotPasswordObj.Token = token;
+
+                return forgotPasswordObj;
+            }
+            return null;
+        }
+
+
+        public async Task<bool> ResetPassword(ResetPasswordModel resetmodel)
+        {
+            if (resetmodel.Token == null || resetmodel.Email == null)
+            {
+                return false;
+            }
+
+            var user = await _userManager.FindByNameAsync(resetmodel.Email);
+
+            var resetPassResult = await _userManager.ResetPasswordAsync(user, resetmodel.Token, resetmodel.Password);
+
+            if (!resetPassResult.Succeeded)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
