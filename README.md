@@ -1,2 +1,2 @@
 # NewspaperAdvertisementManagementSystem
-webservice for Newpaper Advertisement Management System
+webservice for Newpaper Advertisement Management System.
