@@ -58,6 +58,7 @@ namespace NewspaperAdvertisementManagementSystem
 
             });
 
+
             services.AddDbContext<ApplicationDbContext>(options =>
           options.UseNpgsql(Configuration.GetConnectionString("Conn")));
 
@@ -111,6 +112,7 @@ namespace NewspaperAdvertisementManagementSystem
                 app.UseDeveloperExceptionPage();
             }
 
+          
             app.UseHttpsRedirection();
 
             app.UseCors(builder => builder

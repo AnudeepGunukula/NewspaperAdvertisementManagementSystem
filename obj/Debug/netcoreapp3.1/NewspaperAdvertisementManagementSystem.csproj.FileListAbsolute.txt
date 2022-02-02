@@ -59,3 +59,4 @@ C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSyst
 C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSystem\obj\Debug\netcoreapp3.1\NewspaperAdvertisementManagementSystem.dll
 C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSystem\obj\Debug\netcoreapp3.1\NewspaperAdvertisementManagementSystem.pdb
 C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSystem\obj\Debug\netcoreapp3.1\NewspaperAdvertisementManagementSystem.genruntimeconfig.cache
+C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSystem\bin\Debug\netcoreapp3.1\launchSettings.json

@@ -42,3 +42,4 @@ C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSyst
 C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSystem\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
 C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSystem\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSystem\obj\Debug\docker-compose.dcproj.CopyComplete
+C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSystem\bin\Debug\launchSettings.json

@@ -1,15 +1,23 @@
 version: '3.1'
 
+networks:
+  dockerapi-dev:
+    driver: bridge 
+
 services:
   newspaperadvertisementmanagementsystem:
     image: ${DOCKER_REGISTRY-}newspaperadvertisementmanagementsystem
+    depends_on:
+       - "postgres_image"
     build:
       context: .
       dockerfile: Dockerfile
     environment:
           DBServer: "postgres_image"
     ports:
-      - "3000:80"
+      - "5000:80"
+    networks:
+      - dockerapi-dev  
 
   postgres_image:
     image: postgres:latest
@@ -19,3 +27,11 @@ services:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "password"
       POSTGRES_DB: "Namsdb"
+    networks:
+      - dockerapi-dev
+  angular:
+    image: namsui
+    ports:
+      - "4200:4200"
+    networks:
+      - dockerapi-dev

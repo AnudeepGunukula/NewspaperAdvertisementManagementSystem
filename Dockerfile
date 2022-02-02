@@ -13,6 +13,7 @@ COPY . .
 WORKDIR "/src/"
 RUN dotnet build "NewspaperAdvertisementManagementSystem.csproj" -c Release -o /app/build
 
+
 FROM build AS publish
 RUN dotnet publish "NewspaperAdvertisementManagementSystem.csproj" -c Release -o /app/publish
 
