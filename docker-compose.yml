@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  newspaperadvertisementmanagementsystem:
+    image: ${DOCKER_REGISTRY-}newspaperadvertisementmanagementsystem
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+          DBServer: "postgres_image"
+    ports:
+      - "3000:80"
+
+  postgres_image:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: "Namsdb"

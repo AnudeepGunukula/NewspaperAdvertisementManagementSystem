@@ -1,0 +1,28 @@
+services:
+  newspaperadvertisementmanagementsystem:
+    build:
+      context: C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSystem
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      DBServer: postgres_image
+    image: newspaperadvertisementmanagementsystem
+    ports:
+    - published: 3000
+      target: 80
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\anude\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\anude\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+  postgres_image:
+    environment:
+      POSTGRES_DB: Namsdb
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+    image: postgres:latest
+    ports:
+    - published: 5432
+      target: 5432
+version: '3.1'

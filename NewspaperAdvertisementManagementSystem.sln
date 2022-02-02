@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewspaperAdvertisementManagementSystem", "NewspaperAdvertisementManagementSystem.csproj", "{3E3CCD42-C710-48CD-9E06-8A67E792A5DF}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{ECC06CA6-69AA-422A-9AE7-269FB124B30C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3E3CCD42-C710-48CD-9E06-8A67E792A5DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E3CCD42-C710-48CD-9E06-8A67E792A5DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E3CCD42-C710-48CD-9E06-8A67E792A5DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECC06CA6-69AA-422A-9AE7-269FB124B30C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECC06CA6-69AA-422A-9AE7-269FB124B30C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECC06CA6-69AA-422A-9AE7-269FB124B30C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECC06CA6-69AA-422A-9AE7-269FB124B30C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

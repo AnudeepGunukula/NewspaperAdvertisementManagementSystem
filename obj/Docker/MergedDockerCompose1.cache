@@ -1,0 +1,43 @@
+networks:
+  dockerapi-dev:
+    driver: bridge
+services:
+  newspaperadvertisementmanagementsystem:
+    build:
+      context: C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSystem
+      dockerfile: Dockerfile
+    depends_on:
+      postgres_image:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      DB_CONNECTION_STRING: host=postgres_image;port=5432;database=Namsdb;username=postgres;password=password
+    image: newspaperadvertisementmanagementsystem
+    networks:
+      dockerapi-dev: {}
+    ports:
+    - published: 8000
+      target: 80
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\anude\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\anude\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+  postgres_image:
+    environment:
+      POSTGRES_DB: Namsdb
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+    image: postgres:latest
+    networks:
+      dockerapi-dev: {}
+    ports:
+    - target: 5432
+    restart: always
+    volumes:
+    - C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSystem\dbscripts\seed.sql:/docker-entrypoint-initdb.d/seed.sql:rw
+    - db_volume:/var/lib/postgresql/data:rw
+version: '3.4'
+volumes:
+  db_volume: {}

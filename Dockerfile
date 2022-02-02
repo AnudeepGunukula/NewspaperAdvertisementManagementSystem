@@ -8,9 +8,9 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
 COPY ["NewspaperAdvertisementManagementSystem.csproj", "."]
-RUN dotnet restore "./NewspaperAdvertisementManagementSystem.csproj"
+RUN dotnet restore "NewspaperAdvertisementManagementSystem.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/"
 RUN dotnet build "NewspaperAdvertisementManagementSystem.csproj" -c Release -o /app/build
 
 FROM build AS publish
