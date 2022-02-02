@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "3e3ccd42-c710-48cd-9e06-8a67e792a5df": {
+      "ProjectGuid": "3e3ccd42-c710-48cd-9e06-8a67e792a5df",
+      "DisplayName": "NewspaperAdvertisementManagementSystem",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

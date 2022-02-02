@@ -1,29 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\AGUNUKUL\\Desktop\\Algo\\Github\\NewspaperAdvertisementManagementSystem\\NewspaperAdvertisementManagementSystem.csproj": {}
+    "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\NewspaperAdvertisementManagementSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\AGUNUKUL\\Desktop\\Algo\\Github\\NewspaperAdvertisementManagementSystem\\NewspaperAdvertisementManagementSystem.csproj": {
+    "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\NewspaperAdvertisementManagementSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AGUNUKUL\\Desktop\\Algo\\Github\\NewspaperAdvertisementManagementSystem\\NewspaperAdvertisementManagementSystem.csproj",
+        "projectUniqueName": "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\NewspaperAdvertisementManagementSystem.csproj",
         "projectName": "NewspaperAdvertisementManagementSystem",
-        "projectPath": "C:\\Users\\AGUNUKUL\\Desktop\\Algo\\Github\\NewspaperAdvertisementManagementSystem\\NewspaperAdvertisementManagementSystem.csproj",
-        "packagesPath": "C:\\Users\\AGUNUKUL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AGUNUKUL\\Desktop\\Algo\\Github\\NewspaperAdvertisementManagementSystem\\obj\\",
+        "projectPath": "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\NewspaperAdvertisementManagementSystem.csproj",
+        "packagesPath": "C:\\Users\\anude\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\AGUNUKUL\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\anude\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.0": {
+            "targetAlias": "netcoreapp3.0",
             "projectReferences": {}
           }
         },
@@ -35,6 +38,7 @@
       },
       "frameworks": {
         "netcoreapp3.0": {
+          "targetAlias": "netcoreapp3.0",
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -60,12 +64,9 @@
               "target": "Package",
               "version": "[2.1.0-preview1-final, )"
             },
-            "Microsoft.NETCore.App": {
-              "include": "None",
-              "suppressParent": "All",
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
-              "version": "[3.0.0-preview7-27912-14, )",
-              "autoReferenced": true
+              "version": "[1.14.0, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
@@ -90,6 +91,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.0.1, 3.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.0.3, 3.0.3]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -97,7 +116,8 @@
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
-          }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
