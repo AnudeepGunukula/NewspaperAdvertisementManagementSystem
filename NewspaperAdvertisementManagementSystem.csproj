@@ -22,6 +22,5 @@
 		<Folder Include="Images\" />
 		<Folder Include="Images\Advertisements\" />
 		<Folder Include="Images\Clients" />
-		<Folder Include="Images\Clients\" />
 	</ItemGroup>
 </Project>
