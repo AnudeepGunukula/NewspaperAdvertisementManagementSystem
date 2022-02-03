@@ -1,0 +1,41 @@
+networks:
+  dockerapi-dev:
+    driver: bridge
+services:
+  angular:
+    depends_on:
+      newspaperadvertisementmanagementsystem:
+        condition: service_started
+    image: namsui
+    networks:
+      dockerapi-dev: null
+    ports:
+    - published: 4200
+      target: 80
+  newspaperadvertisementmanagementsystem:
+    build:
+      context: C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSystem
+      dockerfile: Dockerfile
+    depends_on:
+      postgres_image:
+        condition: service_started
+    environment:
+      DBServer: postgres_image
+    image: newspaperadvertisementmanagementsystem
+    networks:
+      dockerapi-dev: null
+    ports:
+    - published: 5000
+      target: 80
+  postgres_image:
+    environment:
+      POSTGRES_DB: Namsdb
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+    image: postgres:latest
+    networks:
+      dockerapi-dev: null
+    ports:
+    - published: 5432
+      target: 5432
+version: '3.1'

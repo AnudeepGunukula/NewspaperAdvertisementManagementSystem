@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   newspaperadvertisementmanagementsystem:
-    image: newspaperadvertisementmanagementsystem:dev
+    image: anudeepgunukula/newspaperadvertisementmanagementsystem:dev
     container_name: NewspaperAdvertisementManagementSystem_1
     build:
       target: base

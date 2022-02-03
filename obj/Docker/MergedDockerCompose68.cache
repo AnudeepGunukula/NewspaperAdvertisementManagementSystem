@@ -1,0 +1,64 @@
+networks:
+  dockerapi-dev:
+    driver: bridge
+services:
+  angular:
+    depends_on:
+      newspaperadvertisementmanagementsystem:
+        condition: service_started
+    image: anudeepgunukula/namsui
+    networks:
+      dockerapi-dev: {}
+    ports:
+    - published: 80
+      target: 80
+  newspaperadvertisementmanagementsystem:
+    build:
+      context: C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSystem
+      dockerfile: Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: NewspaperAdvertisementManagementSystem
+      target: base
+    container_name: NewspaperAdvertisementManagementSystem_1
+    depends_on:
+      postgres_image:
+        condition: service_started
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      DBServer: postgres_image
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: ''
+    image: anudeepgunukula/newspaperadvertisementmanagementsystem:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/bin/Debug/netcoreapp3.1/NewspaperAdvertisementManagementSystem.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    networks:
+      dockerapi-dev: {}
+    ports:
+    - published: 5000
+      target: 8080
+    tty: true
+    volumes:
+    - C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSystem:/app:rw
+    - C:\Users\anude\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\anude\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\anude\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Users\anude\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Users\anude\source\repos\AnudeepGunukula\NewspaperAdvertisementManagementSystem:/src:rw
+  postgres_image:
+    environment:
+      POSTGRES_DB: Namsdb
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+    image: postgres:latest
+    networks:
+      dockerapi-dev: {}
+    ports:
+    - published: 5432
+      target: 5432
+version: '3.1'

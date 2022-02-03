@@ -5,8 +5,20 @@ networks:
     driver: bridge 
 
 services:
+
+  postgres_image:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: "Namsdb"
+    networks:
+      - dockerapi-dev
+
   newspaperadvertisementmanagementsystem:
-    image: ${DOCKER_REGISTRY-}newspaperadvertisementmanagementsystem
+    image: anudeepgunukula/newspaperadvertisementmanagementsystem
     depends_on:
        - "postgres_image"
     build:
@@ -19,19 +31,9 @@ services:
     networks:
       - dockerapi-dev  
 
-  postgres_image:
-    image: postgres:latest
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "password"
-      POSTGRES_DB: "Namsdb"
-    networks:
-      - dockerapi-dev
   angular:
-    image: namsui
+    image: anudeepgunukula/namsui
     ports:
-      - "4200:4200"
+      - "80:4200"
     networks:
       - dockerapi-dev
