@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0DHvh5keLyDBihn36NVfilyRQIdZ6zdciVrGed2V3XabrPgw1mNZccL1Yqr5xxsNgp51oQT28Zwt3TrmEeX2lQ==",
+  "dgSpecHash": "sRyuC4mmX+HpmAYlDNwXfD/ZLtcuzyEoE7SaUj0x49zUOMNrJeA9xoa5/UHlxHZzWMnS2XXtDJmwyADy7jPKVg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\NewspaperAdvertisementManagementSystem.csproj",
+  "projectFilePath": "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\newspaperadvertisementmanagementsystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\anude\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.0.0-preview7.19365.7\\microsoft.aspnetcore.authentication.jwtbearer.3.0.0-preview7.19365.7.nupkg.sha512",
     "C:\\Users\\anude\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
@@ -141,10 +141,10 @@
     "C:\\Users\\anude\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\anude\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\anude\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\anude\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.21\\microsoft.netcore.app.host.win-x64.3.1.21.nupkg.sha512",
-    "C:\\Users\\anude\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\anude\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
     "C:\\Users\\anude\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\anude\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
+    "C:\\Users\\anude\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\anude\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.21\\microsoft.netcore.app.host.win-x64.3.1.21.nupkg.sha512"
   ],
   "logs": []
 }

@@ -31,7 +31,7 @@ namespace NewspaperAdvertisementManagementSystem.Controllers
 
 
 
-        [Authorize(Roles = UserRoles.Admin)]
+        [AllowAnonymous]
         [HttpPost("AdminSignUp")]
         public async Task<IActionResult> AdminSignUp([FromBody] SignUp signUpModel)
         {

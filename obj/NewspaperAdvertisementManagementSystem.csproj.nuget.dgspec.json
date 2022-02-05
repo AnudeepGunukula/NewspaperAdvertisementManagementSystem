@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\NewspaperAdvertisementManagementSystem.csproj": {}
+    "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\newspaperadvertisementmanagementsystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\NewspaperAdvertisementManagementSystem.csproj": {
+    "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\newspaperadvertisementmanagementsystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\NewspaperAdvertisementManagementSystem.csproj",
-        "projectName": "NewspaperAdvertisementManagementSystem",
-        "projectPath": "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\NewspaperAdvertisementManagementSystem.csproj",
+        "projectUniqueName": "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\newspaperadvertisementmanagementsystem.csproj",
+        "projectName": "newspaperadvertisementmanagementsystem",
+        "projectPath": "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\newspaperadvertisementmanagementsystem.csproj",
         "packagesPath": "C:\\Users\\anude\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\anude\\source\\repos\\AnudeepGunukula\\NewspaperAdvertisementManagementSystem\\obj\\",
         "projectStyle": "PackageReference",

@@ -112,7 +112,7 @@ namespace NewspaperAdvertisementManagementSystem
                 app.UseDeveloperExceptionPage();
             }
 
-          
+
             app.UseHttpsRedirection();
 
             app.UseCors(builder => builder
@@ -126,12 +126,25 @@ namespace NewspaperAdvertisementManagementSystem
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "NewspaperAdvertisementManagementSystem API V1");
             });
 
+            app.UseStaticFiles();
+
+            if (!Directory.Exists("wwwroot"))
+            {
+                Directory.CreateDirectory("wwwroot");
+            }
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot")),
+                RequestPath = "/wwwroot"
+            });
 
             app.UseFileServer(new FileServerOptions
             {
+
                 FileProvider = new PhysicalFileProvider(
-                   Path.Combine(Directory.GetCurrentDirectory(), "Images")),
-                RequestPath = "/Images",
+               Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
+                RequestPath = "/wwwroot",
                 EnableDefaultFiles = true
             });
 

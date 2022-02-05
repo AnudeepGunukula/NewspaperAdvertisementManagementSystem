@@ -29,7 +29,7 @@
   },
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "NewspaperAdvertisementManagementSystem/1.0.0": {
+      "newspaperadvertisementmanagementsystem/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.0.0-preview7.19365.7",
           "Microsoft.AspNetCore.Cors": "2.2.0",
@@ -307,10 +307,10 @@
           "WindowsBase": "4.0.0.0"
         },
         "runtime": {
-          "NewspaperAdvertisementManagementSystem.dll": {}
+          "newspaperadvertisementmanagementsystem.dll": {}
         },
         "compile": {
-          "NewspaperAdvertisementManagementSystem.dll": {}
+          "newspaperadvertisementmanagementsystem.dll": {}
         }
       },
       "Microsoft.AspNetCore.Authentication.JwtBearer/3.0.0-preview7.19365.7": {
@@ -3291,7 +3291,7 @@
     }
   },
   "libraries": {
-    "NewspaperAdvertisementManagementSystem/1.0.0": {
+    "newspaperadvertisementmanagementsystem/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
