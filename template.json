@@ -1,0 +1,182 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sites_newsagencyapi_name": {
+            "defaultValue": "newsagencyapi",
+            "type": "String"
+        },
+        "serverfarms_ASP_rgnams_ad84_externalid": {
+            "defaultValue": "/subscriptions/2a81b076-75c8-44bb-9688-8536d72d8190/resourceGroups/rg-nams/providers/Microsoft.Web/serverfarms/ASP-rgnams-ad84",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2021-02-01",
+            "name": "[parameters('sites_newsagencyapi_name')]",
+            "location": "Central US",
+            "kind": "app,linux,container",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_newsagencyapi_name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_newsagencyapi_name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[parameters('serverfarms_ASP_rgnams_ad84_externalid')]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "linuxFxVersion": "COMPOSE|dmVyc2lvbjogJzMuNCcNCg0KbmV0d29ya3M6DQogIGRvY2tlcmFwaS1kZXY6DQogICAgZHJpdmVyOiBicmlkZ2UNCg0Kc2VydmljZXM6DQoNCiAgcG9zdGdyZXNfaW1hZ2U6DQogICAgaW1hZ2U6IHBvc3RncmVzOmxhdGVzdA0KICAgIHBvcnRzOg0KICAgICAgLSA1NDMyDQogICAgcmVzdGFydDogYWx3YXlzDQogICAgdm9sdW1lczoNCiAgICAgIC0gZGJfdm9sdW1lOi92YXIvbGliL3Bvc3RncmVzcWwvZGF0YQ0KICAgIGVudmlyb25tZW50Og0KICAgICAgUE9TVEdSRVNfVVNFUjogInBvc3RncmVzIg0KICAgICAgUE9TVEdSRVNfUEFTU1dPUkQ6ICJwYXNzd29yZCINCiAgICAgIFBPU1RHUkVTX0RCOiAiTmFtc2RiIg0KICAgIG5ldHdvcmtzOg0KICAgICAgLSBkb2NrZXJhcGktZGV2DQoNCiAgbmV3c3BhcGVyYWR2ZXJ0aXNlbWVudG1hbmFnZW1lbnRzeXN0ZW06DQogICAgaW1hZ2U6IGFudWRlZXBndW51a3VsYS9uZXdzcGFwZXJhZHZlcnRpc2VtZW50bWFuYWdlbWVudHN5c3RlbQ0KICAgIGRlcGVuZHNfb246DQogICAgICAtICJwb3N0Z3Jlc19pbWFnZSINCiAgICBidWlsZDoNCiAgICAgIGNvbnRleHQ6IC4NCiAgICAgIGRvY2tlcmZpbGU6IERvY2tlcmZpbGUNCiAgICBlbnZpcm9ubWVudDoNCiAgICAgIERCU2VydmVyOiAicG9zdGdyZXNfaW1hZ2UiDQogICAgcG9ydHM6DQogICAgICAtIDgwOjgwDQogICAgbmV0d29ya3M6DQogICAgICAtIGRvY2tlcmFwaS1kZXYNCnZvbHVtZXM6DQogIGRiX3ZvbHVtZToNCg==",
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": false,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 1
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "customDomainVerificationId": "FFCCBD0760D456EF9519885CD5BDAACC37096DD7E0C4302E06722B619DC7905E",
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": false,
+                "redundancyMode": "None",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2021-02-01",
+            "name": "[concat(parameters('sites_newsagencyapi_name'), '/ftp')]",
+            "location": "Central US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_newsagencyapi_name'))]"
+            ],
+            "properties": {
+                "allow": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2021-02-01",
+            "name": "[concat(parameters('sites_newsagencyapi_name'), '/scm')]",
+            "location": "Central US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_newsagencyapi_name'))]"
+            ],
+            "properties": {
+                "allow": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2021-02-01",
+            "name": "[concat(parameters('sites_newsagencyapi_name'), '/web')]",
+            "location": "Central US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_newsagencyapi_name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "COMPOSE|dmVyc2lvbjogJzMuNCcNCg0KbmV0d29ya3M6DQogIGRvY2tlcmFwaS1kZXY6DQogICAgZHJpdmVyOiBicmlkZ2UNCg0Kc2VydmljZXM6DQoNCiAgcG9zdGdyZXNfaW1hZ2U6DQogICAgaW1hZ2U6IHBvc3RncmVzOmxhdGVzdA0KICAgIHBvcnRzOg0KICAgICAgLSA1NDMyDQogICAgcmVzdGFydDogYWx3YXlzDQogICAgdm9sdW1lczoNCiAgICAgIC0gZGJfdm9sdW1lOi92YXIvbGliL3Bvc3RncmVzcWwvZGF0YQ0KICAgIGVudmlyb25tZW50Og0KICAgICAgUE9TVEdSRVNfVVNFUjogInBvc3RncmVzIg0KICAgICAgUE9TVEdSRVNfUEFTU1dPUkQ6ICJwYXNzd29yZCINCiAgICAgIFBPU1RHUkVTX0RCOiAiTmFtc2RiIg0KICAgIG5ldHdvcmtzOg0KICAgICAgLSBkb2NrZXJhcGktZGV2DQoNCiAgbmV3c3BhcGVyYWR2ZXJ0aXNlbWVudG1hbmFnZW1lbnRzeXN0ZW06DQogICAgaW1hZ2U6IGFudWRlZXBndW51a3VsYS9uZXdzcGFwZXJhZHZlcnRpc2VtZW50bWFuYWdlbWVudHN5c3RlbQ0KICAgIGRlcGVuZHNfb246DQogICAgICAtICJwb3N0Z3Jlc19pbWFnZSINCiAgICBidWlsZDoNCiAgICAgIGNvbnRleHQ6IC4NCiAgICAgIGRvY2tlcmZpbGU6IERvY2tlcmZpbGUNCiAgICBlbnZpcm9ubWVudDoNCiAgICAgIERCU2VydmVyOiAicG9zdGdyZXNfaW1hZ2UiDQogICAgcG9ydHM6DQogICAgICAtIDgwOjgwDQogICAgbmV0d29ya3M6DQogICAgICAtIGRvY2tlcmFwaS1kZXYNCnZvbHVtZXM6DQogIGRiX3ZvbHVtZToNCg==",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2019",
+                "httpLoggingEnabled": false,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "$newsagencyapi",
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": false,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": false
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 1,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 1,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.0",
+                "ftpsState": "AllAllowed",
+                "preWarmedInstanceCount": 0,
+                "functionAppScaleLimit": 0,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 1,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2021-02-01",
+            "name": "[concat(parameters('sites_newsagencyapi_name'), '/', parameters('sites_newsagencyapi_name'), '.azurewebsites.net')]",
+            "location": "Central US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_newsagencyapi_name'))]"
+            ],
+            "properties": {
+                "siteName": "newsagencyapi",
+                "hostNameType": "Verified"
+            }
+        }
+    ]
+}
